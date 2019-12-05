@@ -8,4 +8,8 @@ target 'demo23' do
   # Pods for demo23
 
 pod "SnapKit"
+pod "Alamofire"
+pod "ObjectMapper"
+pod "AlamofireObjectMapper"
+pod 'GrowingTextView', '0.7.1'
 end

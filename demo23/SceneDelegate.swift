@@ -11,17 +11,36 @@ import UIKit
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
     var window: UIWindow?
-
+  let status = UserDefaults.standard.string(forKey: "status")
 
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
         window = UIWindow(frame: UIScreen.main.bounds)
         guard let windowScene = (scene as? UIWindowScene) else {return}
         window?.windowScene = windowScene
-                  let mainVC = ViewController()
-                  let navigation = UINavigationController(rootViewController: mainVC)
-                  window?.rootViewController = mainVC
+//                  let navigation = UINavigationController(rootViewController: mainVC)
+//                  window?.rootViewController = LoginViewController(
+            if(status != nil ){
+                let mainVC = HomeViewController()
+                 let navigation = UINavigationController(rootViewController: mainVC)
+                let slideVC = MenuViewController()
+                let nav = UINavigationController(rootViewController: mainVC)
+
+                let slideMenuController = SlideMenuController(mainViewController: nav, leftMenuViewController: slideVC)
+                SlideMenuOptions.hideStatusBar = false
+                window?.rootViewController = slideMenuController
+//           window?.rootViewController = navigation
+            }else{
+                 window?.rootViewController = LoginViewController()
+            }
+       
+//        if status == true {
+//        switchViewController()
+//        } else {
+//            switchLoginController()
+//        }
+//        Switcher.updateRootVC()
                   window?.makeKeyAndVisible()
-        guard let _ = (scene as? UIWindowScene) else { return }
+//        guard let _ = (scene as? UIWindowScene) else { return }
     }
 
     func sceneDidDisconnect(_ scene: UIScene) {
@@ -51,7 +70,6 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         // Use this method to save data, release shared resources, and store enough scene-specific state information
         // to restore the scene back to its current state.
     }
-
 
 }
 

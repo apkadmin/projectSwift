@@ -1,16 +1,34 @@
 PODS:
+  - Alamofire (4.9.1)
+  - AlamofireObjectMapper (5.2.1):
+    - Alamofire (~> 4.7)
+    - ObjectMapper (~> 3.4)
+  - GrowingTextView (0.7.1)
+  - ObjectMapper (3.5.1)
   - SnapKit (5.0.1)
 
 DEPENDENCIES:
+  - Alamofire
+  - AlamofireObjectMapper
+  - GrowingTextView (= 0.7.1)
+  - ObjectMapper
   - SnapKit
 
 SPEC REPOS:
   trunk:
+    - Alamofire
+    - AlamofireObjectMapper
+    - GrowingTextView
+    - ObjectMapper
     - SnapKit
 
 SPEC CHECKSUMS:
+  Alamofire: 85e8a02c69d6020a0d734f6054870d7ecb75cf18
+  AlamofireObjectMapper: 1989f690e982b71921b9253f53a4f33a9bc00d88
+  GrowingTextView: 6dff7eedf2fc93f8378d20d456782afd0267b0cc
+  ObjectMapper: 70187b8941977c62ccfb423caf6b50be405cabf0
   SnapKit: 97b92857e3df3a0c71833cce143274bf6ef8e5eb
 
-PODFILE CHECKSUM: c59b19cc37a3c0661057607689139aea205e201e
+PODFILE CHECKSUM: 6cc09d9b43b9981e78b2960bac7432fd88c4cee7
 
 COCOAPODS: 1.8.4

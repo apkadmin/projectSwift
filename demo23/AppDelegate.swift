@@ -13,17 +13,27 @@ import UIKit
 class AppDelegate: UIResponder, UIApplicationDelegate {
     
     var window: UIWindow?
-
-
+    let status = UserDefaults.standard.string(forKey: "status")
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
         if #available(IOS 13.0, *){
-            
+
         }else {
+            
             window = UIWindow(frame: UIScreen.main.bounds)
-            let mainVC = ViewController()
-            let navigation = UINavigationController(rootViewController: mainVC)
-            window?.rootViewController = mainVC
+          if(status != nil ){
+                let mainVC = HomeViewController()
+                let navigation = UINavigationController(rootViewController: mainVC)
+                let slideVC = MenuViewController()
+                let nav = UINavigationController(rootViewController: mainVC)
+
+                let slideMenuController = SlideMenuController(mainViewController: nav, leftMenuViewController: slideVC)
+            SlideMenuOptions.hideStatusBar = false
+            window?.rootViewController = slideMenuController
+//                window?.rootViewController = navigation
+            }else{
+                window?.rootViewController = LoginViewController()
+            }
             window?.makeKeyAndVisible()
         }
         return true
@@ -42,7 +52,23 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // If any sessions were discarded while the application was not running, this will be called shortly after application:didFinishLaunchingWithOptions.
         // Use this method to release any resources that were specific to the discarded scenes, as they will not return.
     }
-
+//    func switchViewController() {
+//
+//        // switch root view controllers
+//        let storyboard = UIStoryboard.init(name: "Main", bundle: nil)
+//        let nav = storyboard.instantiateViewController(withIdentifier: "MainView")
+//
+//        self.window?.rootViewController = nav
+//
+//    }
+//
+//    func switchLoginController() {
+//
+//        // switch back to view controller 1
+//        let storyboard = UIStoryboard.init(name: "Main", bundle: nil)
+//        let nav = storyboard.instantiateViewController(withIdentifier: "LoginView")
+//        self.window?.rootViewController = nav
+//    }
 
 }
 
