@@ -76,7 +76,9 @@ class CreateIssuesViewController: UIViewController {
             make.left.right.equalTo(titleTextFieldAnimated)
         }
         descriptionTextView.layer.borderWidth = 0.5
-        descriptionTextView.layer.borderColor = CGColor(
+        let myColor : UIColor = UIColor( red: 0.5, green: 0.5, blue:0, alpha: 1.0 )
+        descriptionTextView.layer.borderColor = myColor.cgColor
+
         descriptionTextView.font = UIFont.systemFont(ofSize: 20)
         descriptionTextView.snp.makeConstraints{(make) in
             make.top.equalTo(descriptionLabel.snp.bottom).offset(10)
