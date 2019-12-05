@@ -7,20 +7,29 @@
 //
 
 import UIKit
+import Photos
 
 class CreateIssuesViewController: UIViewController {
-
+    var imagePicker: UIImagePickerController!
+    var listImage: [String] = []
     let scrollView = UIScrollView()
     let containerView = UIView()
     let addressTextFieldAnimated = UITextFieldAnimated()
     let titleTextFieldAnimated = UITextFieldAnimated()
     let descriptionLabel = UILabel()
     let descriptionTextView = UITextView()
-    
+    let imageCollectionView : UICollectionView = {
+        let layout  = UICollectionViewFlowLayout()
+        let cllection = UICollectionView(frame: CGRect.zero, collectionViewLayout:layout)
+            cllection.register(ImageCollectionViewCell.self, forCellWithReuseIdentifier: "CollectionViewCell")
+        layout.scrollDirection = .horizontal
+        return cllection
+    }()
     override func viewDidLoad() {
         super.viewDidLoad()
         setNavigation()
         setView()
+        setImageCollection()
         // Do any additional setup after loading the view.
     }
     
@@ -85,9 +94,24 @@ class CreateIssuesViewController: UIViewController {
             make.left.right.equalTo(titleTextFieldAnimated)
             make.height.equalTo(100).priority(99)
         }
+        
+        containerView.addSubview(imageCollectionView)
+       imageCollectionView.snp.makeConstraints{(make) in
+           make.top.equalTo(descriptionTextView.snp.bottom).offset(30)
+           make.left.right.equalTo(containerView)
+           make.height.equalTo(100)
+       }
+        
     }
     
-    
+    func setImageCollection(){
+           imageCollectionView.delegate = self
+           imageCollectionView.dataSource = self
+           imageCollectionView.backgroundColor = .white
+           imageCollectionView.contentInset = UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10)
+            imagePicker = UIImagePickerController()
+            imagePicker.delegate = self
+       }
        //action show menu navbar
     @objc func showMenu(){
            self.slideMenuController()?.openLeft()
@@ -96,5 +120,147 @@ class CreateIssuesViewController: UIViewController {
     @objc func sendIssues(){
         print("save")
     }
+    func selectImage() {
+        let alert = UIAlertController(title: "App", message: "Select Image", preferredStyle: .alert)
+        let cancel = UIAlertAction(title: "Close", style: .default, handler: nil)
+        let libray = UIAlertAction(title: "Library", style: .default, handler: {(_) in print("Select image from library")
+            
+             self.fromLibrary()
+        })
+        let camera = UIAlertAction(title: "Camera", style: .default, handler: {(_) in print("Select image from Camera")
+            self.fromCamera()
+           
+        })
+        
+        alert.addAction(camera)
+        alert.addAction(libray)
+        alert.addAction(cancel)
 
+        present(alert,animated: true,completion: nil)
+    }
+    
+    func confirm(message: String, viewController: UIViewController?, success: @escaping ()-> Void){
+          let alert = UIAlertController(title: "NoiBai App", message: message, preferredStyle: .alert)
+              let action = UIAlertAction(title: "OK", style: .default, handler: nil)
+              alert.addAction(action)
+        viewController?.present(alert, animated: true, completion: nil)
+    }
+
+    func setting(){
+        let meessage = "App can accest the picture and library. Image not sharing if you not accept"
+        confirm(message: meessage, viewController: self){
+            guard let settingsURI = URL(string: UIApplicationOpenSettingsURLString)else { return }
+            if UIApplication.shared.canOpenURL(settingsURI){
+                if #available(IOS 10.0, *){
+                    UIApplication.shared.openURL(settingsURI)
+                } else{
+                    UIApplication.shared.openURL(settingsURI)
+                }
+            }
+        }
+    }
+    
+    private func fromLibrary(){
+        func choosePhoto(){
+            
+            DispatchQueue.main.async {
+                self.imagePicker.allowsEditing = false
+                self.imagePicker.sourceType = .photoLibrary
+                self.imagePicker.mediaTypes = UIImagePickerController.availableMediaTypes(for: .photoLibrary)!
+                self.imagePicker.modalPresentationStyle = .popover
+              self.present(self.imagePicker,animated: true, completion: nil)
+            }
+                        
+        }
+        let status = PHPhotoLibrary.authorizationStatus()
+        if status == PHAuthorizationStatus.authorized {
+            //quyen dc cap
+            choosePhoto()
+        }else if (status == PHAuthorizationStatus.denied){
+            //quyen bi tu choi
+            setting()
+        } else if(status == PHAuthorizationStatus.notDetermined){
+            PHPhotoLibrary.requestAuthorization({(newStatus) in
+                if (newStatus == PHAuthorizationStatus.authorized){
+                    choosePhoto()
+                }
+                else {
+                    print("Not permision accest library")
+                    self.setting()
+                }
+            })
+        } else if (status == PHAuthorizationStatus.restricted){
+            //truy cap bi han che
+            print("Restricted access")
+            setting()
+        }
+
+    }
+    func fromCamera(){
+        func tackePhoto(){
+            if UIImagePickerController.isSourceTypeAvailable(.camera){
+                self.imagePicker.allowsEditing = false
+                self.imagePicker.sourceType = UIImagePickerController.SourceType.camera
+                self.imagePicker.cameraCaptureMode = .photo
+                self.imagePicker.cameraDevice = .front
+                self.imagePicker.modalPresentationStyle = .fullScreen
+                DispatchQueue.main.async {
+                    self.present(self.imagePicker,animated: true, completion: nil)
+                }
+            } else {
+                print("abc")
+                DispatchQueue.main.async {
+                    let alert =  UIAlertController(title:"Alert", message: "No camera", preferredStyle: .alert)
+                    let ok = UIAlertAction(title: "OK", style: .default, handler: nil)
+                    alert.addAction(ok)
+                    self.present(alert,animated: true, completion: nil)
+                }
+            }
+        }
+    }
+}
+extension CreateIssuesViewController: UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        let size = 100
+        return CGSize(width: size, height: size)
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return listImage.count + 1;
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "CollectionViewCell", for: indexPath) as! ImageCollectionViewCell
+        if indexPath.row == listImage.count {
+            cell.imageView.isHidden = true
+            cell.uploadBtn.isHidden = false
+            cell.deleteBtn.isHidden = true
+            cell.didUpload = { self.selectImage() }
+        } else {
+            cell.imageView.image = UIImage(named:listImage[indexPath.row])
+           
+        }
+        return cell
+    }
+}
+
+extension CreateIssuesViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate{
+//    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+//        guard let selectedImage = info[.originalImage] as? UIImage else {
+//            print("error: \(info)")
+//            return
+//        }
+//        print(selectedImage)
+//        dismiss(animated: true, completion: nil)
+//    }
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
+        guard let selectedImage = info as? UIImage else {
+                    print("error: \(info)")
+                    return
+                }
+            
+        imageCollectionView.reloadData()
+        
+                dismiss(animated: true, completion: nil)
+    }
 }

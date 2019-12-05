@@ -86,6 +86,7 @@ class UpDateProfileViewController: UIViewController {
         }
         usernameTextFieldAnimated.Label.text = "Họ và tên"
         usernameTextFieldAnimated.Input.setBottomBorder()
+        usernameTextFieldAnimated.Input.text = "Han Duy"
         if usernameTextFieldAnimated.Input.text != "" {
             usernameTextFieldAnimated.textFieldDidBeginEditing(usernameTextFieldAnimated.Input)
         }
@@ -96,6 +97,7 @@ class UpDateProfileViewController: UIViewController {
         }
         phoneTextFieldAnimated.Label.text = "Số điện thoại"
         phoneTextFieldAnimated.Input.setBottomBorder()
+        phoneTextFieldAnimated.Input.text = "0123456789"
         if phoneTextFieldAnimated.Input.text != "" {
             phoneTextFieldAnimated.textFieldDidBeginEditing(phoneTextFieldAnimated.Input)
         }
@@ -107,7 +109,7 @@ class UpDateProfileViewController: UIViewController {
         
         addressTextFieldAnimated.Label.text = "Địa chỉ"
         addressTextFieldAnimated.Input.setBottomBorder()
-        addressTextFieldAnimated.Input.text = "asdfojpfjoasdfjodsaf"
+        addressTextFieldAnimated.Input.text = "Ha noi"
         if addressTextFieldAnimated.Input.text != "" {
             addressTextFieldAnimated.textFieldDidBeginEditing(addressTextFieldAnimated.Input)
         }

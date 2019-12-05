@@ -68,6 +68,7 @@ class ListIssuesTableViewCell: UITableViewCell {
         
         titleLabel.snp.makeConstraints{(make) in
             make.top.left.equalTo(contentView).inset(16)
+            make.width.equalTo(contentView).dividedBy(1.5)
         }
         timeLabel.snp.makeConstraints{(make) in
             make.top.equalTo(titleLabel)

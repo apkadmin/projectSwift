@@ -50,7 +50,7 @@ class HomeViewController: UIViewController {
        setUpTableView()
 
      
-    listIssues.append(Issue.init(id:1, status: "Chưa xử lý", address: "CT5 - Toà B3 - Khu sảnh A (gần bãi để xe E5asdfasdfasklhadflskfjaskjfa ;jkaspfasdjfpjioasdhsdfhbuiosdbuioasdfiodfnasnhfakjfhsadjfhasdljfhlaskfhlaskfhlsadjfkasdjfhsdkahfasiuhfkasfhaskdjfaksdjfaslkdfhlaskdfaskldjfkladjhfdklajfkasdjfkasjfklasdjfklasjflaskdhfasdfsdfas", title: "Vỡ ống nước", description: "Vỡ đường ống, nước chảy tung toé cống asdpbflkasdfklasdn,mf;asdm j;mj; n;ll 'lp     l bnkbn p        mk'kvjpjlhiocgjhccgjhpijcđang có dấu hiệu tăng dần theo thời gian",date:"12/12/2019",time:"8:19", images: ["user"]))
+    listIssues.append(Issue.init(id:1, status: "Chưa xử lý", address: "CT5 - Toà B3 - Khu sảnh A (gần bãi để xe)", title: "Vỡ ống nước", description: "Vỡ đường ống, nước chảy tung toé cống có dấu hiệu tăng dần theo thời gian",date:"12/12/2019",time:"8:19", images: ["user"]))
        // Do any additional setup after loading the view.
    }
      

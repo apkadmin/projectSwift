@@ -38,18 +38,12 @@ class DetailIssuesViewController: UIViewController {
         label.textColor = .orange
         return label
     }()
-    let addressTextView : UITextView = {
-        let text = UITextView()
-        text.isUserInteractionEnabled = false
-        text.font = UIFont.systemFont(ofSize: 20)
-//        text.setLeftPaddingPoints(10)
+    let addressTextView : DescriptionView = {
+        let text = DescriptionView()
         return text
     }()
-    let titleTextField : UITextField = {
-        let text = UITextField()
-        text.setBottomBorder()
-        text.setLeftPaddingPoints(10)
-        text.isUserInteractionEnabled = false
+    let titleTextField : DescriptionView = {
+        let text = DescriptionView()
         return text
     }()
 
@@ -71,7 +65,6 @@ class DetailIssuesViewController: UIViewController {
         layout.scrollDirection = .horizontal
         return cllection
     }()
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         setNavigation()
@@ -89,14 +82,12 @@ class DetailIssuesViewController: UIViewController {
           navigationController!.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white]
           navigationController?.navigationBar.barTintColor = .init(red: 255/255, green: 127/255, blue: 69/255, alpha: 1.0)
           navigationController?.navigationBar.tintColor = UIColor.white
-          //        navigationController?.navigationBar.isTranslucent = true
-          //     self.automaticallyAdjustsScrollViewInsets = true
           self.edgesForExtendedLayout = UIRectEdge.top
           self.edgesForExtendedLayout = UIRectEdge.bottom
       }
       
       func setView(){
-//        issue = Issue.init(id:1,status: "Chưa xử lý", address: "CT5 - Toà B3 - Khu sảnh A (gần bãi để xe E5", title: "Vỡ ống nước", description: "Vỡ đường ống, nước chảy tung toé cống đang có dấu hiệu tăng",date:"12/12/2019",time:"8:19", images: ["user"])
+        
         view.backgroundColor = .white
         view.addSubview(scrollView)
         scrollView.addSubview(containerView)
@@ -130,12 +121,12 @@ class DetailIssuesViewController: UIViewController {
               make.right.equalTo(statusValueLabel)
           }
           
-          containerView.addSubview(addressTextView)
-          addressTextView.text = issue?.address
-          addressTextView.snp.makeConstraints{(make) in
-              make.top.equalTo(addressLabel.snp.bottom).offset(10)
-              make.left.right.equalTo(addressLabel)
-          }
+        containerView.addSubview(addressTextView)
+        addressTextView.Label.text = issue?.address
+        addressTextView.snp.makeConstraints{(make) in
+            make.top.equalTo(addressLabel.snp.bottom).offset(10)
+            make.leading.trailing.equalTo(addressLabel)
+        }
           
           containerView.addSubview(titleLabel)
           titleLabel.snp.makeConstraints{(make) in
@@ -144,7 +135,7 @@ class DetailIssuesViewController: UIViewController {
           }
           
           containerView.addSubview(titleTextField)
-          titleTextField.text = issue?.title
+        titleTextField.Label.text = issue?.title
           titleTextField.snp.makeConstraints{(make) in
               make.top.equalTo(titleLabel.snp.bottom).offset(10)
               make.left.right.equalTo(addressLabel)
@@ -174,6 +165,7 @@ class DetailIssuesViewController: UIViewController {
             make.height.equalTo(100)
         }
       }
+    
     func setImageCollection(){
         imageCollectionView.delegate = self
         imageCollectionView.dataSource = self

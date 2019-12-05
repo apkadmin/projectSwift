@@ -9,6 +9,7 @@
 import UIKit
 
 class ImageCollectionViewCell: UICollectionViewCell {
+    var didUpload: (()->Void)?
     let imageView: UIImageView = {
         let view = UIImageView()
         view.image = UIImage(named: "anh1")
@@ -25,6 +26,12 @@ class ImageCollectionViewCell: UICollectionViewCell {
         let view = UIView()
         return view
     }()
+    let uploadBtn: UIButton = {
+       let btn = UIButton()
+        btn.setImage(UIImage(named: "upload"), for: .normal)
+        btn.isHidden = true
+        return btn
+    }()
     func setLayout() {
         super.awakeFromNib()
         contentView.addSubview(containerView)
@@ -37,6 +44,11 @@ class ImageCollectionViewCell: UICollectionViewCell {
         imageView.snp.makeConstraints{(make) in
             make.width.height.equalTo(containerView)
         }
+        containerView.addSubview(uploadBtn)
+        uploadBtn.addTarget(self, action: #selector(selectImage), for: .touchUpInside)
+        uploadBtn.snp.makeConstraints{(make) in
+            make.width.height.equalTo(containerView)
+        }
         
         contentView.addSubview(deleteBtn)
         deleteBtn.snp.makeConstraints{(make) in
@@ -44,9 +56,11 @@ class ImageCollectionViewCell: UICollectionViewCell {
             make.trailing.equalTo(contentView).offset(10)
             make.width.height.equalTo(30)
         }
-        
     }
     
+    @objc func selectImage(){
+        didUpload?()
+    }
     override init(frame: CGRect) {
         super.init(frame: frame)
         setLayout()

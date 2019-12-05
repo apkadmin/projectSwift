@@ -18,6 +18,7 @@
 		8E2F3AA12398BF3F006CC1F2 /* UIViewController+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E2F3AA02398BF3F006CC1F2 /* UIViewController+Extension.swift */; };
 		8E2F3AA42398BFAB006CC1F2 /* SlideMenuController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E2F3AA32398BFAB006CC1F2 /* SlideMenuController.swift */; };
 		8E2F3AA62398BFE1006CC1F2 /* Menu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E2F3AA52398BFE1006CC1F2 /* Menu.swift */; };
+		8E2F3AAA2399087A006CC1F2 /* DescriptionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E2F3AA92399087A006CC1F2 /* DescriptionView.swift */; };
 		8E361C67239692A30071FB83 /* TPKeyboardAvoidingSwift.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E361C66239692A30071FB83 /* TPKeyboardAvoidingSwift.swift */; };
 		8E3815142396B3A3009E95B0 /* ApiGateWay.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E3815132396B3A3009E95B0 /* ApiGateWay.swift */; };
 		8E3815182396C579009E95B0 /* DetailIssuesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E3815172396C579009E95B0 /* DetailIssuesViewController.swift */; };
@@ -57,6 +58,7 @@
 		8E2F3AA02398BF3F006CC1F2 /* UIViewController+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIViewController+Extension.swift"; sourceTree = "<group>"; };
 		8E2F3AA32398BFAB006CC1F2 /* SlideMenuController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SlideMenuController.swift; sourceTree = "<group>"; };
 		8E2F3AA52398BFE1006CC1F2 /* Menu.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Menu.swift; sourceTree = "<group>"; };
+		8E2F3AA92399087A006CC1F2 /* DescriptionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DescriptionView.swift; sourceTree = "<group>"; };
 		8E361C66239692A30071FB83 /* TPKeyboardAvoidingSwift.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TPKeyboardAvoidingSwift.swift; sourceTree = "<group>"; };
 		8E3815132396B3A3009E95B0 /* ApiGateWay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiGateWay.swift; sourceTree = "<group>"; };
 		8E3815172396C579009E95B0 /* DetailIssuesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailIssuesViewController.swift; sourceTree = "<group>"; };
@@ -167,6 +169,7 @@
 				8E87DFB92393FE400035EE4D /* SettingTableViewCell.swift */,
 				8E38151A2396C753009E95B0 /* ImageCollectionViewCell.swift */,
 				8E2F3A9C2398A495006CC1F2 /* ListIssuesTableViewCell.swift */,
+				8E2F3AA92399087A006CC1F2 /* DescriptionView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -355,6 +358,7 @@
 				8E3815182396C579009E95B0 /* DetailIssuesViewController.swift in Sources */,
 				8E87DFAC2393A8AC0035EE4D /* MenuViewController.swift in Sources */,
 				8E14E4462389199500EFE5A1 /* HomeViewController.swift in Sources */,
+				8E2F3AAA2399087A006CC1F2 /* DescriptionView.swift in Sources */,
 				8E361C67239692A30071FB83 /* TPKeyboardAvoidingSwift.swift in Sources */,
 				8EBC8AED23964F510094E6D0 /* User.swift in Sources */,
 				8EC687D52396749F000A8E6A /* HeightNavigation.swift in Sources */,
