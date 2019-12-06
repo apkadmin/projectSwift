@@ -55,9 +55,9 @@ class SettingViewController: UIViewController {
             make.top.left.bottom.right.equalTo(0)
         }
         mytableView.register(SettingTableViewCell.self, forCellReuseIdentifier: "Cell")
+        mytableView.separatorStyle = UITableViewCell.SeparatorStyle.none
         mytableView.delegate = self
         mytableView.dataSource = self
-
     }
 
     //set Acction

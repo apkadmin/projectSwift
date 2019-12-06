@@ -9,7 +9,7 @@
 import UIKit
 
 class MenuViewController: UIViewController {
-      var delegate: HomeControllerDelegate?
+    var delegate: HomeControllerDelegate?
     var listMenu:[Menu] = [Menu]()
     let containner = UIView()
     let cardInfo = UIView()
@@ -68,6 +68,15 @@ class MenuViewController: UIViewController {
         cardInfo.addSubview(userName)
         cardInfo.addSubview(userPhone)
         
+        if let username =   UserDefaults.standard.string(forKey: "username"), !username.isEmpty {
+             userName.text = username
+        }
+        if let useravatar =   UserDefaults.standard.string(forKey: "useravatar") , !useravatar.isEmpty {
+                    cardImage.image = UIImage(named: useravatar)
+        }
+       if let userphone =   UserDefaults.standard.string(forKey: "userphone"), !userphone.isEmpty {
+            userPhone.text = userphone
+       }
         cardUser.snp.makeConstraints{(make) in
             make.top.left.right.equalTo(containner)
             make.height.equalTo(100)
@@ -111,7 +120,13 @@ class MenuViewController: UIViewController {
         listMenu.append(Menu(icon:"setting",name: "Cài đặt"))
         listMenu.append(Menu(icon:"logout",name: "Đăng xuất"))
     }
-    
+    func resetDefaults() {
+        let defaults = UserDefaults.standard
+        let dictionary = defaults.dictionaryRepresentation()
+        dictionary.keys.forEach { key in
+            defaults.removeObject(forKey: key)
+        }
+    }
    
 }
 
@@ -150,7 +165,7 @@ extension MenuViewController: UITableViewDataSource, UITableViewDelegate {
             self.slideMenuController()?.changeMainViewController(settingNav, close: true)
         case "Đăng xuất":
             self.slideMenuController()
-            UserDefaults.standard.removeObject(forKey: "status")
+            self.resetDefaults()
             Switcher.updateRootVC()
         default:
             let settingVC = HomeViewController()

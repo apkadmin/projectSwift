@@ -142,7 +142,11 @@ class LoginViewController: UIViewController {
             if profileResponse?.code == 0 {
                 if let res = profileResponse?.data {
                     UserDefaults.standard.set(res.token, forKey: "status")
-                        Switcher.updateRootVC()
+                    UserDefaults.standard.set(res.userProfile?.avatar, forKey: "useravatar")
+                    UserDefaults.standard.set(res.userProfile?.name, forKey: "username")
+                    UserDefaults.standard.set(res.userProfile?.phone, forKey: "userphone")
+                    UserDefaults.standard.set(res.userProfile?.address, forKey: "useraddress")
+                    Switcher.updateRootVC()
                 }
             } else{
                 if let message = profileResponse?.message {
