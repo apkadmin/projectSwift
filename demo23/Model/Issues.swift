@@ -7,24 +7,55 @@
 //
 
 import Foundation
-class Issue {
-    var id: Int
-    var status: String
-    var address: String
-    var title: String
-    var description: String
-    var images : [String]
-    var date:String
-    var time:String
-    
-    init(id:Int,status:String,address:String,title:String,description:String,date:String, time: String,images:[String]) {
-        self.id          = id
-        self.status      = status
-        self.address     = address
-        self.title       = title
-        self.description = description
-        self.images      = images
-        self.date        = date
-        self.time        = time
+import ObjectMapper
+//var id = 0
+//var title = ""
+//var content = ""
+//var address = ""
+//var time = ""
+//var date = ""
+//var status = ""
+//var media = ""
+//
+//required convenience init?(map: Map) {
+//    self.init()
+//}
+//
+//func mapping(map: Map) {
+//    id <- map["id"]
+//    title <- map["title"]
+//    content <- map["content"]
+//    address <- map["address"]
+//    time <- map["time"]
+//    date <- map["date"]
+//    status <- map["status"]
+//    media <- map["media"]
+//}
+
+
+class Issue: Mappable {
+    required convenience init?(map: Map) {
+           self.init()
     }
+    
+    var content = ""
+    var id = 0
+    var title = ""
+    var address = ""
+    var time = ""
+    var date = ""
+    var status = ""
+    var media:[String] = []
+    
+    func mapping(map: Map) {
+        id <- map["id"]
+        title <- map["title"]
+        content <- map["content"]
+        address <- map["address"]
+        time <- map["time"]
+        date <- map["date"]
+        status <- map["status"]
+        media <- map["media"]
+    }
+
 }

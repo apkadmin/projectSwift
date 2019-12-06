@@ -154,7 +154,7 @@ class DetailIssuesViewController: UIViewController {
           }
           
           descriptionView.addSubview(descriptionTextView)
-          descriptionTextView.text = issue?.description
+          descriptionTextView.text = issue?.content
           descriptionTextView.snp.makeConstraints{(make) in
               make.top.bottom.left.right.equalTo(descriptionView)
           }
@@ -188,13 +188,13 @@ extension DetailIssuesViewController: UICollectionViewDataSource, UICollectionVi
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return (issue?.images.count)!
+        return (issue?.media.count)!
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "CollectionViewCell", for: indexPath) as! ImageCollectionViewCell
-        let imageid = issue?.images
-        cell.imageView.image = UIImage(named:(imageid?[indexPath.row])!)
+        let mediaId = issue?.media
+        cell.imageView.image = UIImage(named:(mediaId?[indexPath.row])!)
         return cell
     }
 }

@@ -28,6 +28,7 @@
 		8E3815212396CC9A009E95B0 /* Protocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E3815202396CC9A009E95B0 /* Protocols.swift */; };
 		8E57E5842397987900BC71C7 /* UserInfoResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E57E5832397987900BC71C7 /* UserInfoResponse.swift */; };
 		8E57E5862397AE7000BC71C7 /* UpDateProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E57E5852397AE7000BC71C7 /* UpDateProfileViewController.swift */; };
+		8E649F292399E269004E0322 /* DataIssues.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E649F282399E269004E0322 /* DataIssues.swift */; };
 		8E87DFAC2393A8AC0035EE4D /* MenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E87DFAB2393A8AC0035EE4D /* MenuViewController.swift */; };
 		8E87DFB02393AF2F0035EE4D /* SettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E87DFAF2393AF2F0035EE4D /* SettingViewController.swift */; };
 		8E87DFB22393B22A0035EE4D /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E87DFB12393B22A0035EE4D /* LoginViewController.swift */; };
@@ -35,8 +36,6 @@
 		8E87DFBA2393FE400035EE4D /* SettingTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E87DFB92393FE400035EE4D /* SettingTableViewCell.swift */; };
 		8E87DFC023941F5E0035EE4D /* MenuTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E87DFBF23941F5E0035EE4D /* MenuTableViewCell.swift */; };
 		8EBC8AED23964F510094E6D0 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EBC8AEC23964F510094E6D0 /* User.swift */; };
-		8EBC8AEF239659240094E6D0 /* testmodel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EBC8AEE239659240094E6D0 /* testmodel.swift */; };
-		8EBC8AF1239660EC0094E6D0 /* demoObjectMapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EBC8AF0239660EC0094E6D0 /* demoObjectMapper.swift */; };
 		8EC5A6FC2397E24100CA8978 /* UITextFieldAnimated.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EC5A6FB2397E24100CA8978 /* UITextFieldAnimated.swift */; };
 		8EC5A71E2398159600CA8978 /* CreateIssuesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EC5A71D2398159600CA8978 /* CreateIssuesViewController.swift */; };
 		8EC687D323967446000A8E6A /* BottomBorder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EC687D223967446000A8E6A /* BottomBorder.swift */; };
@@ -68,6 +67,7 @@
 		8E3815202396CC9A009E95B0 /* Protocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Protocols.swift; sourceTree = "<group>"; };
 		8E57E5832397987900BC71C7 /* UserInfoResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInfoResponse.swift; sourceTree = "<group>"; };
 		8E57E5852397AE7000BC71C7 /* UpDateProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpDateProfileViewController.swift; sourceTree = "<group>"; };
+		8E649F282399E269004E0322 /* DataIssues.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataIssues.swift; sourceTree = "<group>"; };
 		8E87DFAB2393A8AC0035EE4D /* MenuViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuViewController.swift; sourceTree = "<group>"; };
 		8E87DFAF2393AF2F0035EE4D /* SettingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingViewController.swift; sourceTree = "<group>"; };
 		8E87DFB12393B22A0035EE4D /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = LoginViewController.swift; path = ../View/LoginViewController.swift; sourceTree = "<group>"; };
@@ -75,8 +75,6 @@
 		8E87DFB92393FE400035EE4D /* SettingTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingTableViewCell.swift; sourceTree = "<group>"; };
 		8E87DFBF23941F5E0035EE4D /* MenuTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuTableViewCell.swift; sourceTree = "<group>"; };
 		8EBC8AEC23964F510094E6D0 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
-		8EBC8AEE239659240094E6D0 /* testmodel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = testmodel.swift; sourceTree = "<group>"; };
-		8EBC8AF0239660EC0094E6D0 /* demoObjectMapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = demoObjectMapper.swift; sourceTree = "<group>"; };
 		8EC5A6FB2397E24100CA8978 /* UITextFieldAnimated.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UITextFieldAnimated.swift; sourceTree = "<group>"; wrapsLines = 0; };
 		8EC5A71D2398159600CA8978 /* CreateIssuesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateIssuesViewController.swift; sourceTree = "<group>"; };
 		8EC687D223967446000A8E6A /* BottomBorder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomBorder.swift; sourceTree = "<group>"; };
@@ -211,11 +209,10 @@
 			children = (
 				8E2F3AA52398BFE1006CC1F2 /* Menu.swift */,
 				8EBC8AEC23964F510094E6D0 /* User.swift */,
-				8EBC8AEE239659240094E6D0 /* testmodel.swift */,
-				8EBC8AF0239660EC0094E6D0 /* demoObjectMapper.swift */,
 				8E38151C2396C9BD009E95B0 /* Issues.swift */,
 				8E38151E2396CAE7009E95B0 /* MenuOption.swift */,
 				8E57E5832397987900BC71C7 /* UserInfoResponse.swift */,
+				8E649F282399E269004E0322 /* DataIssues.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -353,8 +350,8 @@
 				8E2F3AA12398BF3F006CC1F2 /* UIViewController+Extension.swift in Sources */,
 				8E87DFBA2393FE400035EE4D /* SettingTableViewCell.swift in Sources */,
 				8E2F3A9D2398A495006CC1F2 /* ListIssuesTableViewCell.swift in Sources */,
+				8E649F292399E269004E0322 /* DataIssues.swift in Sources */,
 				8E87DFC023941F5E0035EE4D /* MenuTableViewCell.swift in Sources */,
-				8EBC8AEF239659240094E6D0 /* testmodel.swift in Sources */,
 				8E3815182396C579009E95B0 /* DetailIssuesViewController.swift in Sources */,
 				8E87DFAC2393A8AC0035EE4D /* MenuViewController.swift in Sources */,
 				8E14E4462389199500EFE5A1 /* HomeViewController.swift in Sources */,
@@ -366,7 +363,6 @@
 				8E14E4422389199500EFE5A1 /* AppDelegate.swift in Sources */,
 				8E14E4442389199500EFE5A1 /* SceneDelegate.swift in Sources */,
 				8E3815142396B3A3009E95B0 /* ApiGateWay.swift in Sources */,
-				8EBC8AF1239660EC0094E6D0 /* demoObjectMapper.swift in Sources */,
 				8E38151F2396CAE7009E95B0 /* MenuOption.swift in Sources */,
 				8E87DFB02393AF2F0035EE4D /* SettingViewController.swift in Sources */,
 				8EC687D323967446000A8E6A /* BottomBorder.swift in Sources */,

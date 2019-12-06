@@ -43,16 +43,16 @@ class HomeViewController: UIViewController {
     var searchBar: UISearchBar!
     var isSearching: Bool = false
     
-   override func viewDidLoad() {
-       super.viewDidLoad()
-       setNavigation()
-       setView()
-       setUpTableView()
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        loadData()
+        setNavigation()
+        setView()
+        setUpTableView()
 
-     
-    listIssues.append(Issue.init(id:1, status: "Chưa xử lý", address: "CT5 - Toà B3 - Khu sảnh A (gần bãi để xe)", title: "Vỡ ống nước", description: "Vỡ đường ống, nước chảy tung toé cống có dấu hiệu tăng dần theo thời gian",date:"12/12/2019",time:"8:19", images: ["user"]))
-       // Do any additional setup after loading the view.
-   }
+//        listIssues.append(Issue.init(JSON: {id:"1",media:"user",}))
+    // Do any additional setup after loading the view.
+    }
      
    
    //set navigation
@@ -96,6 +96,24 @@ class HomeViewController: UIViewController {
 
      }
    
+    func loadData(){
+        let status = UserDefaults.standard.string(forKey: "status")
+        let setHeader = [
+            "Authorization": status
+        ]
+        Alamofire.request("\(ApiGateWay.getIssuesURI)?status=-1&keyword=", method: .get,encoding: JSONEncoding.default, headers: (setHeader as! HTTPHeaders))
+        .responseObject { (response: DataResponse<DataIsuesResponse>) in
+                          let profileResponse = response.value
+                          if profileResponse?.code == 0 {
+                              if let res = profileResponse?.data {
+                                if res.resultCount != 0 {
+                                    self.listIssues = res.result
+                                    self.tableView.reloadData()
+                                }
+                              }
+                          }
+                      }
+    }
      func setUpTableView(){
          tableView.delegate = self
          tableView.dataSource = self
