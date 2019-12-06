@@ -110,6 +110,7 @@ class HomeViewController: UIViewController {
      @objc func showMenu(){
            self.slideMenuController()?.openLeft()
      }
+    
      @objc func segmentedValueChanged(_ sender: UISegmentedControl!){
          switch sender.selectedSegmentIndex {
          case 0:

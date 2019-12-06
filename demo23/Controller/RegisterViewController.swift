@@ -7,6 +7,9 @@
 //
 
 import UIKit
+import Alamofire
+import AlamofireObjectMapper
+
 class RegisterViewController: UIViewController {
     let scrollView     = TPKeyboardAvoidingScrollView()
     let containerView  = UIView()
@@ -16,7 +19,11 @@ class RegisterViewController: UIViewController {
     let keyIcon        = UIImageView(image: UIImage(named: "ic_key"))
     let rekeyIcon      = UIImageView(image: UIImage(named: "ic_key"))
     let accountIcon    = UIImageView(image: UIImage(named: "acount"))
-
+    let errorLabel: UILabel       = {
+        let label = UILabel()
+        label.textColor = .red
+        return label
+    }()
     let userNameField : UITextField = {
         let textField = UITextField()
             textField.textAlignment = NSTextAlignment.center
@@ -60,6 +67,7 @@ class RegisterViewController: UIViewController {
             btn.layer.cornerRadius = 5
             btn.setTitle("Đăng ký", for: .normal)
             btn.backgroundColor = UIColor.orange
+            btn.addTarget(self, action: #selector(onRegister), for: .touchUpInside)
         return btn
     }()
     let childNoAcountLabel : UILabel = {
@@ -93,6 +101,7 @@ class RegisterViewController: UIViewController {
         containerView.addSubview(registerButton)
         containerView.addSubview(childNoAcountLabel)
         containerView.addSubview(loginButton)
+        containerView.addSubview(errorLabel)
         
         scrollView.snp.makeConstraints{(make) in
             make.top.bottom.left.right.equalTo(view)
@@ -109,10 +118,13 @@ class RegisterViewController: UIViewController {
            make.width.height.equalTo(130)
            make.top.equalTo(containerView).offset(60)
         }
-
+        errorLabel.snp.makeConstraints{(make) in
+            make.left.right.equalTo(containerView).inset(30)
+            make.top.equalTo(logoImageView.snp.bottom).offset(50)
+        }
         userNameField.leftView = accountIcon
         userNameField.snp.makeConstraints{(make) in
-            make.top.equalTo(logoImageView.snp.bottom).offset(70)
+            make.top.equalTo(errorLabel.snp.bottom).offset(20)
             make.left.right.equalTo(containerView).inset(20)
             make.height.equalTo(40)
         }
@@ -157,5 +169,68 @@ class RegisterViewController: UIViewController {
     @objc func onLogin(){
         dismiss(animated: true, completion: nil)
     }
+    
+    @objc func onRegister(){
+        self.errorLabel.text = ""
+        guard let username = userNameField.text, !username.isEmpty else {
+           return
+       }
+        guard let phone = phoneField.text, !phone.isEmpty else {
+                  return
+        }
+        
+        guard let passwd = passwordField.text, !passwd.isEmpty else {
+                   return
+         }
+        
+        guard let repasswd = repasswordField.text, !repasswd.isEmpty else {
+                   return
+         }
+        if passwd == repasswd {
+        let parameters = [
+            "name": self.userNameField.text,
+            "phone": self.phoneField.text,
+            "password": self.passwordField.text
+        ]
 
+        Alamofire.request(ApiGateWay.registerURI,method: .post, parameters: parameters, encoding: JSONEncoding.default, headers: nil).responseObject { (response: DataResponse<UserInfoResponse>) in
+                let profileResponse = response.value
+                if profileResponse?.code == 0 {
+                    if let res = profileResponse?.data {
+                        self.showToast(message: "Thành công")
+                        sleep(3)
+                        UserDefaults.standard.set(res.token, forKey: "status")
+                            Switcher.updateRootVC()
+                    }
+                } else{
+                    if let message = profileResponse?.message {
+                        self.errorLabel.text = message
+                    } else {
+                        self.errorLabel.text = "Không xác định"
+                    }
+                }
+            }
+        } else {
+            self.errorLabel.text = "Nhập lại password không đúng"
+        }
+    }
+    
+    func showToast(message : String) {
+
+        let toastLabel = UILabel(frame: CGRect(x: self.view.frame.size.width/2 - 75, y: self.view.frame.size.height-100, width: 150, height: 35))
+        toastLabel.backgroundColor = UIColor.black.withAlphaComponent(0.6)
+        toastLabel.textColor = UIColor.white
+        toastLabel.textAlignment = .center;
+        toastLabel.font = UIFont(name: "Montserrat-Light", size: 12.0)
+        toastLabel.text = message
+        toastLabel.alpha = 1.0
+        toastLabel.layer.cornerRadius = 10;
+        toastLabel.clipsToBounds  =  true
+        self.view.addSubview(toastLabel)
+        UIView.animate(withDuration: 4.0, delay: 0.1, options: .curveEaseOut, animations: {
+            toastLabel.alpha = 0.0
+        }, completion: {(isCompleted) in
+            toastLabel.removeFromSuperview()
+        })
+    }
 }

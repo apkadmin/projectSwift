@@ -10,7 +10,7 @@ import Foundation
 class ApiGateWay {
     public static var baseURI : String     = "http://45.118.145.149:8100"
     public static var loginURI : String    = "\(baseURI)/login"
-    public static var registerURI : String = "\(loginURI)/register"
+    public static var registerURI : String = "\(baseURI)/register"
 //        let url = "http://www.json-generator.com/api/json/get/cpdTnDkCnC?indent=2"
     //        Alamofire.request(url, method: .get, parameters: nil, encoding: URLEncoding.default, headers: nil).responseJSON{[weak self] (response) in
     //            print("response: \(response.result)")
