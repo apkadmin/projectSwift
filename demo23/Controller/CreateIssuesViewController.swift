@@ -250,9 +250,8 @@ extension CreateIssuesViewController: UIImagePickerControllerDelegate, UINavigat
                     print("error: \(info)")
                     return
                 }
-            
-        imageCollectionView.reloadData()
         
-                dismiss(animated: true, completion: nil)
+        imageCollectionView.reloadData()
+        dismiss(animated: true, completion: nil)
     }
 }

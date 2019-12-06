@@ -44,7 +44,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		8E14E43E2389199500EFE5A1 /* demo23.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = demo23.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		8E14E43E2389199500EFE5A1 /* Repost Issues.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Repost Issues.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		8E14E4412389199500EFE5A1 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		8E14E4432389199500EFE5A1 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		8E14E4452389199500EFE5A1 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
@@ -126,7 +126,7 @@
 		8E14E43F2389199500EFE5A1 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				8E14E43E2389199500EFE5A1 /* demo23.app */,
+				8E14E43E2389199500EFE5A1 /* Repost Issues.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -247,7 +247,7 @@
 			);
 			name = demo23;
 			productName = demo23;
-			productReference = 8E14E43E2389199500EFE5A1 /* demo23.app */;
+			productReference = 8E14E43E2389199500EFE5A1 /* Repost Issues.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -523,8 +523,8 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.vinid.demo23;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_BUNDLE_IDENTIFIER = com.vinid.reportissues;
+				PRODUCT_NAME = "Repost Issues";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -541,8 +541,8 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.vinid.demo23;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_BUNDLE_IDENTIFIER = com.vinid.reportissues;
+				PRODUCT_NAME = "Repost Issues";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
