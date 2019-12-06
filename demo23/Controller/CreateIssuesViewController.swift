@@ -92,26 +92,27 @@ class CreateIssuesViewController: UIViewController {
         descriptionTextView.snp.makeConstraints{(make) in
             make.top.equalTo(descriptionLabel.snp.bottom).offset(10)
             make.left.right.equalTo(titleTextFieldAnimated)
-            make.height.equalTo(100).priority(99)
+            make.height.equalTo(100)
         }
         
         containerView.addSubview(imageCollectionView)
        imageCollectionView.snp.makeConstraints{(make) in
            make.top.equalTo(descriptionTextView.snp.bottom).offset(30)
            make.left.right.equalTo(containerView)
-           make.height.equalTo(100)
+           make.height.equalTo(110)
        }
         
     }
     
     func setImageCollection(){
-           imageCollectionView.delegate = self
-           imageCollectionView.dataSource = self
-           imageCollectionView.backgroundColor = .white
-           imageCollectionView.contentInset = UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10)
-            imagePicker = UIImagePickerController()
-            imagePicker.delegate = self
-       }
+        imageCollectionView.delegate = self
+        imageCollectionView.dataSource = self
+        imageCollectionView.backgroundColor = .white
+        imageCollectionView.layer.borderColor = UIColor.gray.cgColor
+        imageCollectionView.layer.borderWidth = 1
+        imagePicker = UIImagePickerController()
+        imagePicker.delegate = self
+    }
        //action show menu navbar
     @objc func showMenu(){
            self.slideMenuController()?.openLeft()
@@ -238,21 +239,12 @@ extension CreateIssuesViewController: UICollectionViewDataSource, UICollectionVi
             cell.didUpload = { self.selectImage() }
         } else {
             cell.imageView.image = UIImage(named:listImage[indexPath.row])
-           
         }
         return cell
     }
 }
 
 extension CreateIssuesViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate{
-//    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
-//        guard let selectedImage = info[.originalImage] as? UIImage else {
-//            print("error: \(info)")
-//            return
-//        }
-//        print(selectedImage)
-//        dismiss(animated: true, completion: nil)
-//    }
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
         guard let selectedImage = info as? UIImage else {
                     print("error: \(info)")

@@ -10,15 +10,14 @@ import Foundation
 import UIKit
 
 extension UIView {
-//    func setBottomBorder() {
-//      self.layer.backgroundColor = UIColor.white.cgColor
-//
-////      self.layer.masksToBounds = false
-//      self.layer.shadowColor = UIColor.gray.cgColor
-//      self.layer.shadowOffset = CGSize(width: 0.0, height: 1.0)
-//      self.layer.shadowOpacity = 1.0
-//      self.layer.shadowRadius = 0.0
-//    }
+    func setBottomBorderView() {
+      self.layer.backgroundColor = UIColor.white.cgColor
+      self.layer.masksToBounds = false
+      self.layer.shadowColor = UIColor.gray.cgColor
+      self.layer.shadowOffset = CGSize(width: 0.0, height: 1.0)
+      self.layer.shadowOpacity = 1.0
+      self.layer.shadowRadius = 0.0
+    }
 }
 extension UITextField {
   func setBottomBorder() {

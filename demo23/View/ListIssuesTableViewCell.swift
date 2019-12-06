@@ -76,6 +76,7 @@ class ListIssuesTableViewCell: UITableViewCell {
         }
         addressLabel.snp.makeConstraints{(make) in
             make.top.equalTo(titleLabel.snp.bottom).offset(16)
+            make.left.equalTo(titleLabel)
             make.width.equalTo(contentView).dividedBy(1.5)
             make.bottom.equalTo(contentView).inset(16)
         }

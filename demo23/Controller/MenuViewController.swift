@@ -133,33 +133,29 @@ extension MenuViewController: UITableViewDataSource, UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let menuOption = MenuOption(rawValue: indexPath.row)
-        print(listMenu[indexPath.row].name)
-               let name = listMenu[indexPath.row].name
-               if name == "Báo cáo sự cố" {
-                   let settingVC = CreateIssuesViewController()
-                   let settingNav = UINavigationController(rootViewController: settingVC)
-                   self.slideMenuController()?.changeMainViewController(settingNav, close: true)
-               }
-        if name == "Danh sách sự cố" {
-            let settingVC = HomeViewController()
+    let menuOption = MenuOption(rawValue: indexPath.row)
+    let name = listMenu[indexPath.row].name
+        switch name {
+        case "Báo cáo sự cố":
+            let settingVC = CreateIssuesViewController()
             let settingNav = UINavigationController(rootViewController: settingVC)
             self.slideMenuController()?.changeMainViewController(settingNav, close: true)
-        }
-        if name == "Hồ sơ" {
+        case "Hồ sơ":
             let settingVC = UpDateProfileViewController()
             let settingNav = UINavigationController(rootViewController: settingVC)
             self.slideMenuController()?.changeMainViewController(settingNav, close: true)
-        }
-        if name == "Cài đặt" {
+        case "Cài đặt":
             let settingVC = SettingViewController()
             let settingNav = UINavigationController(rootViewController: settingVC)
             self.slideMenuController()?.changeMainViewController(settingNav, close: true)
-        }
-        if name == "Đăng xuất" {
+        case "Đăng xuất":
             self.slideMenuController()
             UserDefaults.standard.removeObject(forKey: "status")
             Switcher.updateRootVC()
+        default:
+            let settingVC = HomeViewController()
+            let settingNav = UINavigationController(rootViewController: settingVC)
+            self.slideMenuController()?.changeMainViewController(settingNav, close: true)
         }
     }
 }
