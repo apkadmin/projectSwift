@@ -7,9 +7,12 @@
 //
 
 import UIKit
+import Alamofire
+import AlamofireObjectMapper
 
 class DetailIssuesViewController: UIViewController {
     var issue : Issue?
+    var listMedia: [String] = []
     let scrollView = UIScrollView()
     let containerView = UIView()
     let statusLabel: UILabel = {
@@ -73,6 +76,7 @@ class DetailIssuesViewController: UIViewController {
     }()
     override func viewDidLoad() {
         super.viewDidLoad()
+        loadData()
         setNavigation()
         setView()
         setImageCollection()
@@ -91,7 +95,25 @@ class DetailIssuesViewController: UIViewController {
           self.edgesForExtendedLayout = UIRectEdge.top
           self.edgesForExtendedLayout = UIRectEdge.bottom
       }
-      
+    func loadData(){
+        let status = UserDefaults.standard.string(forKey: "status")
+             let setHeader = [
+                 "Authorization": status
+             ]
+        Alamofire.request("\(ApiGateWay.getIssuesURI)/\(issue!.id)", method: .get,encoding: JSONEncoding.default, headers: (setHeader as! HTTPHeaders))
+             .responseObject { (response: DataResponse<ResponseIssues>) in
+                               let profileResponse = response.value
+                               if profileResponse?.code == 0 {
+                                   if let res = profileResponse?.data {
+                                    if res.media.count != 0 {
+                                        print(res.media)
+                                        self.listMedia = res.media
+                                        self.imageCollectionView.reloadData()
+                                     }
+                                   }
+                               }
+                           }
+    }
     func setView(){
         view.backgroundColor = .white
         view.addSubview(scrollView)
@@ -196,13 +218,20 @@ extension DetailIssuesViewController: UICollectionViewDataSource, UICollectionVi
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return (issue?.media.count)!
+        return listMedia.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "CollectionViewCell", for: indexPath) as! ImageCollectionViewCell
-        let mediaId = issue?.media
-        cell.imageView.image = UIImage(named:(mediaId?[indexPath.row])!)
+        let medias = listMedia
+        let link = "\(ApiGateWay.baseURI)\(medias[indexPath.row])"
+       
+//        if let data = try? Data(contentsOf: url) {
+//            cell.imageView.image = UIImage(data: data)
+//        }
+        print(link)
+        cell.imageView.dowloadFromServer(link:link)
+
         return cell
     }
 }

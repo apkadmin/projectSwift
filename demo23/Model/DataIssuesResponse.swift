@@ -23,9 +23,9 @@ class DataIssues: Mappable {
 }
 
 class DataIsuesResponse: Mappable {
-    var responseTime = ""
-    var code = 0
-    var message = ""
+    var responseTime:String = ""
+    var code: Int = -1
+    var message:String = ""
     var data: DataIssues?
 
     required convenience init?(map: Map) {

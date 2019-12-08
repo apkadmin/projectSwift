@@ -8,10 +8,13 @@
 
 import UIKit
 import Photos
+import Alamofire
+import AlamofireObjectMapper
 
 class CreateIssuesViewController: UIViewController {
     var imagePicker: UIImagePickerController!
     var listImage: [String] = []
+    var countImge: [UIImage] = []
     let scrollView = UIScrollView()
     let containerView = UIView()
     let addressTextFieldAnimated = UITextFieldAnimated()
@@ -25,6 +28,7 @@ class CreateIssuesViewController: UIViewController {
         layout.scrollDirection = .horizontal
         return cllection
     }()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         setNavigation()
@@ -58,7 +62,6 @@ class CreateIssuesViewController: UIViewController {
         containerView.addSubview(titleTextFieldAnimated)
         containerView.addSubview(descriptionLabel)
         containerView.addSubview(descriptionTextView)
-        
         scrollView.snp.makeConstraints{(make) in
             make.top.left.right.bottom.equalTo(view)
         }
@@ -101,7 +104,6 @@ class CreateIssuesViewController: UIViewController {
            make.left.right.equalTo(containerView)
            make.height.equalTo(110)
        }
-        
     }
     
     func setImageCollection(){
@@ -119,7 +121,40 @@ class CreateIssuesViewController: UIViewController {
        }
     
     @objc func sendIssues(){
-        print("save")
+        //        {
+        //          "title": "String",
+        //          "content": "String",
+        //          "address": "String",
+        //          "status": "String",
+        //          "media": [
+        //            "String",
+        //            "String"
+        //          ]
+        //        }
+        let status = UserDefaults.standard.string(forKey: "status")
+        let setHeader = [
+            "Authorization": status
+        ]
+        let parameters: [String : Any] = [
+            "title": self.titleTextFieldAnimated.Input.text,
+            "content": self.descriptionTextView.text,
+            "address": self.addressTextFieldAnimated.Input.text,
+            "status": "Chưa xử lý",
+            "media": listImage
+            ]
+        
+        Alamofire.request(ApiGateWay.createIssues,method: .post, parameters: parameters, encoding: JSONEncoding.default, headers: (setHeader as! HTTPHeaders)).responseObject { (response: DataResponse<ResponseIssues>) in
+                 let profileResponse = response.value
+                 if profileResponse?.code == 0 {
+                     if let res = profileResponse?.data {
+                        self.showToast(message: "Thành công")
+                        self.titleTextFieldAnimated.Input.text = nil
+                        self.descriptionTextView.text = nil
+                        self.addressTextFieldAnimated.Input.text = nil
+                        self.listImage.removeAll()
+                     }
+                 }
+             }
     }
     func selectImage() {
         let alert = UIAlertController(title: "App", message: "Select Image", preferredStyle: .alert)
@@ -209,7 +244,6 @@ class CreateIssuesViewController: UIViewController {
                     self.present(self.imagePicker,animated: true, completion: nil)
                 }
             } else {
-                print("abc")
                 DispatchQueue.main.async {
                     let alert =  UIAlertController(title:"Alert", message: "No camera", preferredStyle: .alert)
                     let ok = UIAlertAction(title: "OK", style: .default, handler: nil)
@@ -219,6 +253,32 @@ class CreateIssuesViewController: UIViewController {
             }
         }
     }
+    func showToast(message : String) {
+
+        let toastLabel = UILabel(frame: CGRect(x: self.view.frame.size.width/2 - 75, y: self.view.frame.size.height-100, width: 150, height: 35))
+        toastLabel.backgroundColor = UIColor.black.withAlphaComponent(0.6)
+        toastLabel.textColor = UIColor.white
+        toastLabel.textAlignment = .center;
+        toastLabel.font = UIFont(name: "Montserrat-Light", size: 12.0)
+        toastLabel.text = message
+        toastLabel.alpha = 1.0
+        toastLabel.layer.cornerRadius = 10;
+        toastLabel.clipsToBounds  =  true
+        self.view.addSubview(toastLabel)
+        UIView.animate(withDuration: 4.0, delay: 0.1, options: .curveEaseOut, animations: {
+            toastLabel.alpha = 0.0
+        }, completion: {(isCompleted) in
+            toastLabel.removeFromSuperview()
+        })
+    }
+    func deleteCell(cell: UICollectionViewCell){
+        if let deleteIndexPath = imageCollectionView.indexPath(for: cell){
+            listImage.remove(at: deleteIndexPath.row)
+            countImge.remove(at: deleteIndexPath.row)
+            imageCollectionView.deleteItems(at: [deleteIndexPath])
+        }
+        
+    }
 }
 extension CreateIssuesViewController: UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
@@ -227,31 +287,58 @@ extension CreateIssuesViewController: UICollectionViewDataSource, UICollectionVi
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return listImage.count + 1;
+        return countImge.count + 1;
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "CollectionViewCell", for: indexPath) as! ImageCollectionViewCell
-        if indexPath.row == listImage.count {
+        if indexPath.row == countImge.count {
             cell.imageView.isHidden = true
             cell.uploadBtn.isHidden = false
             cell.deleteBtn.isHidden = true
             cell.didUpload = { self.selectImage() }
         } else {
-            cell.imageView.image = UIImage(named:listImage[indexPath.row])
+            cell.imageView.isHidden = false
+            cell.uploadBtn.isHidden = true
+            cell.deleteBtn.isHidden = false
+            cell.imageView.image = countImge[indexPath.row]
         }
+        cell.actionTabViewController = self
         return cell
     }
+
 }
 
 extension CreateIssuesViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate{
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
-        guard let selectedImage = info as? UIImage else {
-                    print("error: \(info)")
-                    return
+        if let image = info[UIImagePickerControllerOriginalImage] as? UIImage , image != nil {
+        countImge.append(image)
+         imageCollectionView.reloadData()
+        let imgData = UIImageJPEGRepresentation(image, 0.2)!
+        let status = UserDefaults.standard.string(forKey: "status")
+        let setHeader = [
+            "Authorization": status,
+            "content-type": "multipart/form-data"
+        ]
+        Alamofire.upload(multipartFormData: { multipartFormData in
+                multipartFormData.append(imgData, withName: "fileData",fileName: "image.png", mimeType: "image/png")
+        },usingThreshold: UInt64.init(),to:ApiGateWay.uploadFileURI, method: .post,headers: (setHeader as! HTTPHeaders)) { (result) in
+            switch result {
+                case .success(let upload, _, _):
+                upload.responseObject { (response: DataResponse<UploadFileResponse>) in
+                    let ImageResponse = response.value
+                        if ImageResponse?.code == 0 {
+                            if let res = ImageResponse?.data {
+                                self.listImage.append(res)
+                        }
+                    }
                 }
-        
-        imageCollectionView.reloadData()
-        dismiss(animated: true, completion: nil)
+            case .failure(let error):
+                self.showToast(message: "\(error)")
+            }
+        }
+        picker.dismiss(animated: true, completion: nil)
+        }
     }
+
 }

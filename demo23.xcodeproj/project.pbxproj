@@ -26,9 +26,12 @@
 		8E38151D2396C9BD009E95B0 /* Issues.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E38151C2396C9BD009E95B0 /* Issues.swift */; };
 		8E38151F2396CAE7009E95B0 /* MenuOption.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E38151E2396CAE7009E95B0 /* MenuOption.swift */; };
 		8E3815212396CC9A009E95B0 /* Protocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E3815202396CC9A009E95B0 /* Protocols.swift */; };
+		8E56C0FC239BEF85009E80BE /* RoundProgressBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E56C0FB239BEF85009E80BE /* RoundProgressBar.swift */; };
+		8E56C0FE239D5857009E80BE /* ImageViewFromURL.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E56C0FD239D5857009E80BE /* ImageViewFromURL.swift */; };
 		8E57E5842397987900BC71C7 /* UserInfoResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E57E5832397987900BC71C7 /* UserInfoResponse.swift */; };
 		8E57E5862397AE7000BC71C7 /* UpDateProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E57E5852397AE7000BC71C7 /* UpDateProfileViewController.swift */; };
-		8E649F292399E269004E0322 /* DataIssues.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E649F282399E269004E0322 /* DataIssues.swift */; };
+		8E649F292399E269004E0322 /* DataIssuesResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E649F282399E269004E0322 /* DataIssuesResponse.swift */; };
+		8E7BC6B8239A459800BB02E0 /* UploadFileResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E7BC6B7239A459800BB02E0 /* UploadFileResponse.swift */; };
 		8E87DFAC2393A8AC0035EE4D /* MenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E87DFAB2393A8AC0035EE4D /* MenuViewController.swift */; };
 		8E87DFB02393AF2F0035EE4D /* SettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E87DFAF2393AF2F0035EE4D /* SettingViewController.swift */; };
 		8E87DFB22393B22A0035EE4D /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E87DFB12393B22A0035EE4D /* LoginViewController.swift */; };
@@ -65,9 +68,12 @@
 		8E38151C2396C9BD009E95B0 /* Issues.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Issues.swift; sourceTree = "<group>"; };
 		8E38151E2396CAE7009E95B0 /* MenuOption.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuOption.swift; sourceTree = "<group>"; };
 		8E3815202396CC9A009E95B0 /* Protocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Protocols.swift; sourceTree = "<group>"; };
+		8E56C0FB239BEF85009E80BE /* RoundProgressBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundProgressBar.swift; sourceTree = "<group>"; };
+		8E56C0FD239D5857009E80BE /* ImageViewFromURL.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageViewFromURL.swift; sourceTree = "<group>"; };
 		8E57E5832397987900BC71C7 /* UserInfoResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInfoResponse.swift; sourceTree = "<group>"; };
 		8E57E5852397AE7000BC71C7 /* UpDateProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpDateProfileViewController.swift; sourceTree = "<group>"; };
-		8E649F282399E269004E0322 /* DataIssues.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataIssues.swift; sourceTree = "<group>"; };
+		8E649F282399E269004E0322 /* DataIssuesResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataIssuesResponse.swift; sourceTree = "<group>"; };
+		8E7BC6B7239A459800BB02E0 /* UploadFileResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UploadFileResponse.swift; sourceTree = "<group>"; };
 		8E87DFAB2393A8AC0035EE4D /* MenuViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuViewController.swift; sourceTree = "<group>"; };
 		8E87DFAF2393AF2F0035EE4D /* SettingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingViewController.swift; sourceTree = "<group>"; };
 		8E87DFB12393B22A0035EE4D /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = LoginViewController.swift; path = ../View/LoginViewController.swift; sourceTree = "<group>"; };
@@ -168,6 +174,7 @@
 				8E38151A2396C753009E95B0 /* ImageCollectionViewCell.swift */,
 				8E2F3A9C2398A495006CC1F2 /* ListIssuesTableViewCell.swift */,
 				8E2F3AA92399087A006CC1F2 /* DescriptionView.swift */,
+				8E56C0FB239BEF85009E80BE /* RoundProgressBar.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -212,7 +219,8 @@
 				8E38151C2396C9BD009E95B0 /* Issues.swift */,
 				8E38151E2396CAE7009E95B0 /* MenuOption.swift */,
 				8E57E5832397987900BC71C7 /* UserInfoResponse.swift */,
-				8E649F282399E269004E0322 /* DataIssues.swift */,
+				8E649F282399E269004E0322 /* DataIssuesResponse.swift */,
+				8E7BC6B7239A459800BB02E0 /* UploadFileResponse.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -224,6 +232,7 @@
 				8E361C66239692A30071FB83 /* TPKeyboardAvoidingSwift.swift */,
 				8EC687D223967446000A8E6A /* BottomBorder.swift */,
 				8EC687D42396749F000A8E6A /* HeightNavigation.swift */,
+				8E56C0FD239D5857009E80BE /* ImageViewFromURL.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -346,21 +355,24 @@
 				8E87DFB22393B22A0035EE4D /* LoginViewController.swift in Sources */,
 				8E14E45A23896BEE00EFE5A1 /* RegisterViewController.swift in Sources */,
 				8E87DFB42393B67F0035EE4D /* Switcher.swift in Sources */,
+				8E56C0FC239BEF85009E80BE /* RoundProgressBar.swift in Sources */,
 				8E3815212396CC9A009E95B0 /* Protocols.swift in Sources */,
 				8E2F3AA12398BF3F006CC1F2 /* UIViewController+Extension.swift in Sources */,
 				8E87DFBA2393FE400035EE4D /* SettingTableViewCell.swift in Sources */,
 				8E2F3A9D2398A495006CC1F2 /* ListIssuesTableViewCell.swift in Sources */,
-				8E649F292399E269004E0322 /* DataIssues.swift in Sources */,
+				8E649F292399E269004E0322 /* DataIssuesResponse.swift in Sources */,
 				8E87DFC023941F5E0035EE4D /* MenuTableViewCell.swift in Sources */,
 				8E3815182396C579009E95B0 /* DetailIssuesViewController.swift in Sources */,
 				8E87DFAC2393A8AC0035EE4D /* MenuViewController.swift in Sources */,
 				8E14E4462389199500EFE5A1 /* HomeViewController.swift in Sources */,
+				8E56C0FE239D5857009E80BE /* ImageViewFromURL.swift in Sources */,
 				8E2F3AAA2399087A006CC1F2 /* DescriptionView.swift in Sources */,
 				8E361C67239692A30071FB83 /* TPKeyboardAvoidingSwift.swift in Sources */,
 				8EBC8AED23964F510094E6D0 /* User.swift in Sources */,
 				8EC687D52396749F000A8E6A /* HeightNavigation.swift in Sources */,
 				8E2F3AA42398BFAB006CC1F2 /* SlideMenuController.swift in Sources */,
 				8E14E4422389199500EFE5A1 /* AppDelegate.swift in Sources */,
+				8E7BC6B8239A459800BB02E0 /* UploadFileResponse.swift in Sources */,
 				8E14E4442389199500EFE5A1 /* SceneDelegate.swift in Sources */,
 				8E3815142396B3A3009E95B0 /* ApiGateWay.swift in Sources */,
 				8E38151F2396CAE7009E95B0 /* MenuOption.swift in Sources */,

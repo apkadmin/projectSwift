@@ -38,13 +38,13 @@ class Issue: Mappable {
            self.init()
     }
     
-    var content = ""
-    var id = 0
+    var content:String = ""
+    var id:Int = -1
     var title = ""
-    var address = ""
-    var time = ""
-    var date = ""
-    var status = ""
+    var address:String = ""
+    var time :String = ""
+    var date :String = ""
+    var status :String = ""
     var media:[String] = []
     
     func mapping(map: Map) {
@@ -57,5 +57,21 @@ class Issue: Mappable {
         status <- map["status"]
         media <- map["media"]
     }
+}
+class ResponseIssues: Mappable {
+    var responseTime = ""
+    var code = -1
+    var message = ""
+    var data: Issue?
 
+    required convenience init?(map: Map) {
+        self.init()
+    }
+
+    func mapping(map: Map) {
+        responseTime <- map["responseTime"]
+        code <- map["code"]
+        message <- map["message"]
+        data <- map["data"]
+    }
 }

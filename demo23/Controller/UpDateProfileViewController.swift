@@ -93,7 +93,10 @@ class UpDateProfileViewController: UIViewController {
             make.height.equalTo(600)
         }
         if let useravatar = UserDefaults.standard.string(forKey: "useravatar"), !useravatar.isEmpty {
-            userImageView.image = UIImage(named: useravatar)
+            let link = "\(ApiGateWay.baseURI)\(useravatar)"
+            let url = URL(string: link)
+            let data = try? Data(contentsOf: url!) //make sure your image in this url does exist, otherwise unwrap in a if let check /
+            userImageView.image = UIImage(data: data!)
         }
         userImageView.snp.makeConstraints{(make) in
             make.centerX.equalTo(containerView)

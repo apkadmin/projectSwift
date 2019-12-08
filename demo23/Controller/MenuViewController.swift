@@ -72,7 +72,10 @@ class MenuViewController: UIViewController {
              userName.text = username
         }
         if let useravatar =   UserDefaults.standard.string(forKey: "useravatar") , !useravatar.isEmpty {
-                    cardImage.image = UIImage(named: useravatar)
+            let link = "\(ApiGateWay.baseURI)\(useravatar)"
+            let url = URL(string: link)
+            let data = try? Data(contentsOf: url!) //make sure your image in this url does exist, otherwise unwrap in a if let check /
+            cardImage.image = UIImage(data: data!)
         }
        if let userphone =   UserDefaults.standard.string(forKey: "userphone"), !userphone.isEmpty {
             userPhone.text = userphone

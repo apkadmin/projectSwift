@@ -7,9 +7,9 @@
 //
 import ObjectMapper
 class UserInfoResponse: Mappable {
-    var responseTime = ""
-    var code = 0
-    var message = ""
+    var responseTime:String = ""
+    var code: Int = -1
+    var message:String = ""
     var data: DataUser?
 
     required convenience init?(map: Map) {

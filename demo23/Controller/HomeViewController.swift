@@ -11,12 +11,6 @@ import SnapKit
 import Alamofire
 import AlamofireObjectMapper
 
-struct Controller {
-    var icon: UIImage
-    var label: String
-    var viewController: UIViewController
-}
-
 enum State {
     case no_process
     case processing
@@ -92,7 +86,7 @@ class HomeViewController: UIViewController {
              make.left.right.equalTo(segmentControl)
              make.top.equalTo(segmentControl.snp.bottom).offset(20)
             make.bottom.equalTo(scrollView)
-         }
+         }       
 
      }
    
@@ -171,16 +165,17 @@ class HomeViewController: UIViewController {
      }
  
      func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-         print(listIssues[indexPath.row].id)
          let detailVC = DetailIssuesViewController()
+        let selected: Issue
          switch isState {
          case .no_process:
-             detailVC.issue = listIssues.filter { $0.status == "Chưa xử lý"}[indexPath.row]
+             selected = listIssues.filter { $0.status == "Chưa xử lý"}[indexPath.row]
          case .processing:
-             detailVC.issue = listIssues.filter { $0.status == "Đang xử lý"}[indexPath.row]
+             selected = listIssues.filter { $0.status == "Đang xử lý"}[indexPath.row]
          case .processed:
-            detailVC.issue = listIssues.filter { $0.status == "Đã xử lý"}[indexPath.row]
+            selected = listIssues.filter { $0.status == "Đã xử lý"}[indexPath.row]
          }
+        detailVC.issue = selected
  
          self.navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .done, target: self, action: nil)
          self.navigationItem.backBarButtonItem?.tintColor = UIColor.white

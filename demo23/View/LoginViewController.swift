@@ -156,20 +156,6 @@ class LoginViewController: UIViewController {
                 }
             }
         }
-        
-//        let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
-//        let switchViewController = storyBoard.instantiateViewController(withIdentifier: "SettingScreen") as! SettingViewController
-//
-//        self.present(switchViewController, animated:false, completion:nil)
-        
-        
-//        UserDefaults.standard.set(true, forKey: "status")
-//        Switcher.updateRootVC()
-        
-        
-//        let signInPage = self.storyboard?.instantiateViewController(withIdentifier: "MainView") as! ViewController
-//        let appDelegate = UIApplication.shared.delegate
-//        appDelegate?.window??.rootViewController = signInPage
     }
 
 
