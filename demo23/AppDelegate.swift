@@ -13,7 +13,6 @@ import UIKit
 class AppDelegate: UIResponder, UIApplicationDelegate {
     
     var window: UIWindow?
-    let status = UserDefaults.standard.string(forKey: "status")
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
         if #available(IOS 13.0, *){
@@ -21,16 +20,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }else {
             
             window = UIWindow(frame: UIScreen.main.bounds)
-          if(status != nil ){
+            if let token = UserDefaults.standard.string(forKey: TOKEN), token != ""{
                 let mainVC = HomeViewController()
-                let navigation = UINavigationController(rootViewController: mainVC)
                 let slideVC = MenuViewController()
                 let nav = UINavigationController(rootViewController: mainVC)
-
                 let slideMenuController = SlideMenuController(mainViewController: nav, leftMenuViewController: slideVC)
-            SlideMenuOptions.hideStatusBar = false
-            window?.rootViewController = slideMenuController
-//                window?.rootViewController = navigation
+                SlideMenuOptions.hideStatusBar = false
+                window?.rootViewController = slideMenuController
             }else{
                 window?.rootViewController = LoginViewController()
             }

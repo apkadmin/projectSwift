@@ -110,7 +110,7 @@ class UpDateProfileViewController: UIViewController {
             make.width.equalTo(view).multipliedBy(1)
             make.height.equalTo(600)
         }
-        if let useravatar = UserDefaults.standard.string(forKey: "useravatar"), !useravatar.isEmpty {
+        if let useravatar = UserDefaults.standard.string(forKey: USERIMAGE), !useravatar.isEmpty {
             let link = "\(ApiGateWay.baseURI)\(useravatar)"
             userImageView.dowloadFromServer(link: link)
         }
@@ -127,7 +127,7 @@ class UpDateProfileViewController: UIViewController {
             make.width.equalTo(400)
         }
 
-        if let username = UserDefaults.standard.string(forKey: "username"), !username.isEmpty {
+        if let username = UserDefaults.standard.string(forKey: USERNAME), !username.isEmpty {
             usernameTextFieldAnimated.Input.text = username
         }
         
@@ -140,7 +140,7 @@ class UpDateProfileViewController: UIViewController {
             make.height.equalTo(50)
         }
         
-        if let userphone = UserDefaults.standard.string(forKey: "userphone"), !userphone.isEmpty {
+        if let userphone = UserDefaults.standard.string(forKey: USERPHONE), !userphone.isEmpty {
                phoneTextFieldAnimated.Input.text = userphone
            }
         if phoneTextFieldAnimated.Input.text != "" {
@@ -152,7 +152,7 @@ class UpDateProfileViewController: UIViewController {
             make.height.equalTo(50)
         }
         
-        if let useraddress = UserDefaults.standard.string(forKey: "useraddress"), !useraddress.isEmpty {
+        if let useraddress = UserDefaults.standard.string(forKey: USERADDR), !useraddress.isEmpty {
             addressTextFieldAnimated.Input.text = useraddress
         }
         if addressTextFieldAnimated.Input.text != "" {
@@ -332,7 +332,7 @@ extension UpDateProfileViewController: UIImagePickerControllerDelegate, UINaviga
         if let image = info[UIImagePickerControllerOriginalImage] as? UIImage , image != nil {
          userImageView.image = image
         let imgData = UIImageJPEGRepresentation(image, 0.2)!
-        let status = UserDefaults.standard.string(forKey: "status")
+        if let status = UserDefaults.standard.string(forKey: TOKEN) {
         let setHeader = [
             "Authorization": status,
             "content-type": "multipart/form-data"
@@ -361,6 +361,7 @@ extension UpDateProfileViewController: UIImagePickerControllerDelegate, UINaviga
             case .failure(let error):
                 self.showToast(message: "\(error)")
             }
+        }
         }
         picker.dismiss(animated: true, completion: nil)
         }

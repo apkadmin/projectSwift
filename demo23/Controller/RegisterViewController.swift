@@ -22,6 +22,8 @@ class RegisterViewController: UIViewController {
     let errorLabel: UILabel       = {
         let label = UILabel()
         label.textColor = .red
+        label.numberOfLines = 0
+        label.lineBreakMode = .byWordWrapping
         return label
     }()
     let userNameField : UITextField = {
@@ -172,50 +174,18 @@ class RegisterViewController: UIViewController {
     
     @objc func onRegister(){
         self.errorLabel.text = ""
-        guard let username = userNameField.text, !username.isEmpty else {
-           return
-       }
-        guard let phone = phoneField.text, !phone.isEmpty else {
-                  return
-        }
-        
-        guard let passwd = passwordField.text, !passwd.isEmpty else {
-                   return
-         }
-        
-        guard let repasswd = repasswordField.text, !repasswd.isEmpty else {
-                   return
-         }
-        if passwd == repasswd {
-        let parameters = [
-            "name": self.userNameField.text,
-            "phone": self.phoneField.text,
-            "password": self.passwordField.text
-        ]
-
-        Alamofire.request(ApiGateWay.registerURI,method: .post, parameters: parameters, encoding: JSONEncoding.default, headers: nil).responseObject { (response: DataResponse<UserInfoResponse>) in
-                let profileResponse = response.value
-                if profileResponse?.code == 0 {
-                    if let res = profileResponse?.data {
-                        self.showToast(message: "Thành công")
-                        sleep(3)
-                        UserDefaults.standard.set(res.token, forKey: "status")
-                        UserDefaults.standard.set(res.userProfile?.avatar, forKey: "useravatar")
-                        UserDefaults.standard.set(res.userProfile?.name, forKey: "username")
-                        UserDefaults.standard.set(res.userProfile?.phone, forKey: "userphone")
-                        UserDefaults.standard.set(res.userProfile?.address, forKey: "useraddress")
-                        Switcher.updateRootVC()
-                    }
-                } else{
-                    if let message = profileResponse?.message {
-                        self.errorLabel.text = message
-                    } else {
-                        self.errorLabel.text = "Không xác định"
-                    }
-                }
+        if let username = userNameField.text, !username.isEmpty, let phone = phoneField.text, !phone.isEmpty,let repasswd = repasswordField.text, !repasswd.isEmpty, let passwd = passwordField.text, !passwd.isEmpty {
+            if passwd == repasswd {
+                ApiGateWay.register(username, phone, passwd, success: {(data) in
+                    print(data)
+                }, error: {(error) in
+                    self.errorLabel.text = error
+                })
+            } else {
+                self.errorLabel.text = "Nhập lại password không đúng"
             }
         } else {
-            self.errorLabel.text = "Nhập lại password không đúng"
+            self.errorLabel.text = "Mọi trường cần phải đầy đủ"
         }
     }
     

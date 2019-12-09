@@ -56,6 +56,8 @@ class LoginViewController: UIViewController {
     let errorLabel: UILabel = {
         let label = UILabel()
         label.textColor = .red
+        label.numberOfLines = 0
+        label.lineBreakMode = .byWordWrapping
         return label
     }()
     override func viewDidLoad() {
@@ -133,32 +135,12 @@ class LoginViewController: UIViewController {
     }
     
     @objc func onLogin(){
-        let params = [
-            "phone": feildPhone.text,
-            "password": feildPassword.text
-        ]
-        Alamofire.request(ApiGateWay.loginURI, method: .post, parameters: params, encoding: JSONEncoding.default, headers: nil).responseObject { (response: DataResponse<UserInfoResponse>) in
-            let profileResponse = response.value
-            if profileResponse?.code == 0 {
-                if let res = profileResponse?.data {
-                    UserDefaults.standard.set(res.token, forKey: "status")
-                    UserDefaults.standard.set(res.userProfile?.avatar, forKey: "useravatar")
-                    UserDefaults.standard.set(res.userProfile?.name, forKey: "username")
-                    UserDefaults.standard.set(res.userProfile?.phone, forKey: "userphone")
-                    UserDefaults.standard.set(res.userProfile?.address, forKey: "useraddress")
-                    Switcher.updateRootVC()
-                }
-            } else{
-                if let message = profileResponse?.message {
-                    self.errorLabel.text = message
-                } else {
-                    self.errorLabel.text = "Không xác định"
-                }
-            }
-        }
+        ApiGateWay.login(self.feildPhone.text!, self.feildPassword.text!, success: {(data) in
+            print(data)
+        }, error: { (error) in
+            self.errorLabel.text = error
+        })
     }
-
-
 }
 
 

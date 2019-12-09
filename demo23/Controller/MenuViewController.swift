@@ -68,16 +68,16 @@ class MenuViewController: UIViewController {
         cardInfo.addSubview(userName)
         cardInfo.addSubview(userPhone)
         
-        if let username =   UserDefaults.standard.string(forKey: "username"), !username.isEmpty {
+        if let username =   UserDefaults.standard.string(forKey: USERNAME), !username.isEmpty {
              userName.text = username
         }
-        if let useravatar =   UserDefaults.standard.string(forKey: "useravatar") , !useravatar.isEmpty {
+        if let useravatar =   UserDefaults.standard.string(forKey:USERIMAGE) , !useravatar.isEmpty {
             let link = "\(ApiGateWay.baseURI)\(useravatar)"
             let url = URL(string: link)
             let data = try? Data(contentsOf: url!) //make sure your image in this url does exist, otherwise unwrap in a if let check /
             cardImage.image = UIImage(data: data!)
         }
-       if let userphone =   UserDefaults.standard.string(forKey: "userphone"), !userphone.isEmpty {
+       if let userphone =   UserDefaults.standard.string(forKey: USERPHONE), !userphone.isEmpty {
             userPhone.text = userphone
        }
         cardUser.snp.makeConstraints{(make) in

@@ -121,40 +121,15 @@ class CreateIssuesViewController: UIViewController {
        }
     
     @objc func sendIssues(){
-        //        {
-        //          "title": "String",
-        //          "content": "String",
-        //          "address": "String",
-        //          "status": "String",
-        //          "media": [
-        //            "String",
-        //            "String"
-        //          ]
-        //        }
-        let status = UserDefaults.standard.string(forKey: "status")
-        let setHeader = [
-            "Authorization": status
-        ]
-        let parameters: [String : Any] = [
-            "title": self.titleTextFieldAnimated.Input.text,
-            "content": self.descriptionTextView.text,
-            "address": self.addressTextFieldAnimated.Input.text,
-            "status": "Chưa xử lý",
-            "media": listImage
-            ]
-        
-        Alamofire.request(ApiGateWay.createIssues,method: .post, parameters: parameters, encoding: JSONEncoding.default, headers: (setHeader as! HTTPHeaders)).responseObject { (response: DataResponse<ResponseIssues>) in
-                 let profileResponse = response.value
-                 if profileResponse?.code == 0 {
-                     if let res = profileResponse?.data {
-                        self.showToast(message: "Thành công")
-                        self.titleTextFieldAnimated.Input.text = nil
-                        self.descriptionTextView.text = nil
-                        self.addressTextFieldAnimated.Input.text = nil
-                        self.listImage.removeAll()
-                     }
-                 }
-             }
+        ApiGateWay.createIssues(self.titleTextFieldAnimated.Input.text!, self.descriptionTextView.text!, self.addressTextFieldAnimated.Input.text!, listImage, success: { (data) in
+             self.showToast(message: "Thành công")
+            self.titleTextFieldAnimated.Input.text = nil
+            self.descriptionTextView.text = nil
+            self.addressTextFieldAnimated.Input.text = nil
+            self.listImage.removeAll()
+        }, error: {(error) in
+            self.showToast(message: error)}
+        )
     }
     func selectImage() {
         let alert = UIAlertController(title: "App", message: "Select Image", preferredStyle: .alert)
@@ -315,7 +290,7 @@ extension CreateIssuesViewController: UIImagePickerControllerDelegate, UINavigat
         countImge.append(image)
          imageCollectionView.reloadData()
         let imgData = UIImageJPEGRepresentation(image, 0.2)!
-        let status = UserDefaults.standard.string(forKey: "status")
+        if let status = UserDefaults.standard.string(forKey: TOKEN) {
         let setHeader = [
             "Authorization": status,
             "content-type": "multipart/form-data"
@@ -337,6 +312,7 @@ extension CreateIssuesViewController: UIImagePickerControllerDelegate, UINavigat
                 self.showToast(message: "\(error)")
             }
         }
+       }
         picker.dismiss(animated: true, completion: nil)
         }
     }

@@ -13,7 +13,6 @@ class ImageCollectionViewCell: UICollectionViewCell {
     var actionTabViewController : CreateIssuesViewController?
     let imageView: UIImageView = {
         let view = UIImageView()
-        view.image = UIImage(named: "anh1")
         view.contentMode = .scaleToFill
         view.layer.cornerRadius = 10
         return view

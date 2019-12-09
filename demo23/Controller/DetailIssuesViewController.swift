@@ -80,7 +80,6 @@ class DetailIssuesViewController: UIViewController {
         setNavigation()
         setView()
         setImageCollection()
-        // Do any additional setup after loading the view.
     }
       
     
@@ -96,23 +95,12 @@ class DetailIssuesViewController: UIViewController {
           self.edgesForExtendedLayout = UIRectEdge.bottom
       }
     func loadData(){
-        let status = UserDefaults.standard.string(forKey: "status")
-             let setHeader = [
-                 "Authorization": status
-             ]
-        Alamofire.request("\(ApiGateWay.getIssuesURI)/\(issue!.id)", method: .get,encoding: JSONEncoding.default, headers: (setHeader as! HTTPHeaders))
-             .responseObject { (response: DataResponse<ResponseIssues>) in
-                               let profileResponse = response.value
-                               if profileResponse?.code == 0 {
-                                   if let res = profileResponse?.data {
-                                    if res.media.count != 0 {
-                                        print(res.media)
-                                        self.listMedia = res.media
-                                        self.imageCollectionView.reloadData()
-                                     }
-                                   }
-                               }
-                           }
+        ApiGateWay.getIssueDetail(issue!.id, success: { (data) in
+            self.listMedia = data.media
+            self.imageCollectionView.reloadData()
+        }, error: { (error) in
+            print(error)
+        })
     }
     func setView(){
         view.backgroundColor = .white
@@ -163,7 +151,6 @@ class DetailIssuesViewController: UIViewController {
         }
       
         containerView.addSubview(titleTextField)
-//        titleTextField.Label.text = issue?.title
         titleTextField.text = issue?.title
         titleTextField.snp.makeConstraints{(make) in
             make.top.equalTo(titleLabel.snp.bottom).offset(10)
@@ -223,15 +210,17 @@ extension DetailIssuesViewController: UICollectionViewDataSource, UICollectionVi
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "CollectionViewCell", for: indexPath) as! ImageCollectionViewCell
-        let medias = listMedia
-        let link = "\(ApiGateWay.baseURI)\(medias[indexPath.row])"
-       
-//        if let data = try? Data(contentsOf: url) {
-//            cell.imageView.image = UIImage(data: data)
-//        }
-        print(link)
-        cell.imageView.dowloadFromServer(link:link)
-
+        let link = "\(ApiGateWay.baseURI)\(listMedia[indexPath.row])"
+        let url = URL(string: link)!
+         DispatchQueue.global(qos: .userInitiated).async {
+            if let imageData:NSData = NSData(contentsOf: url){
+                DispatchQueue.main.async {
+                    if let image = UIImage(data: imageData as Data), image != nil {
+                        cell.imageView.image = image
+                    }
+                }
+            }
+        }
         return cell
     }
 }

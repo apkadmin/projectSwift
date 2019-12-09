@@ -91,23 +91,14 @@ class HomeViewController: UIViewController {
      }
    
     func loadData(){
-        let status = UserDefaults.standard.string(forKey: "status")
-        let setHeader = [
-            "Authorization": status
-        ]
-        Alamofire.request("\(ApiGateWay.getIssuesURI)?status=-1&keyword=", method: .get,encoding: JSONEncoding.default, headers: (setHeader as! HTTPHeaders))
-        .responseObject { (response: DataResponse<DataIsuesResponse>) in
-                          let profileResponse = response.value
-                          if profileResponse?.code == 0 {
-                              if let res = profileResponse?.data {
-                                if res.resultCount != 0 {
-                                    self.listIssues = res.result
-                                    self.tableView.reloadData()
-                                }
-                              }
-                          }
-                      }
+        ApiGateWay.getIssues(success: {(data) in
+            self.listIssues = data
+            self.tableView.reloadData()
+        }, error: {(error) in
+            print(error)
+        })
     }
+    
      func setUpTableView(){
          tableView.delegate = self
          tableView.dataSource = self
@@ -115,8 +106,6 @@ class HomeViewController: UIViewController {
          tableView.rowHeight = 80
          tableView.tableFooterView = UIView()
      }
-     
-   
    //set Acction
      //action show menu navbar
      @objc func showMenu(){

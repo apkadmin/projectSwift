@@ -21,7 +21,23 @@ class DataIssues: Mappable {
         resultCount <- map["resultCount"]
     }
 }
+class ResponseIssue: Mappable {
+    var responseTime = ""
+    var code = -1
+    var message = ""
+    var data: Issue!
 
+    required convenience init?(map: Map) {
+        self.init()
+    }
+
+    func mapping(map: Map) {
+        responseTime <- map["responseTime"]
+        code <- map["code"]
+        message <- map["message"]
+        data <- map["data"]
+    }
+}
 class DataIsuesResponse: Mappable {
     var responseTime:String = ""
     var code: Int = -1
