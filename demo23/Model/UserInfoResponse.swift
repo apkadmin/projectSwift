@@ -10,8 +10,8 @@ class UserInfoResponse: Mappable {
     var responseTime:String = ""
     var code: Int = -1
     var message:String = ""
-    var data: DataUser?
-
+    var data: DataUser!
+    
     required convenience init?(map: Map) {
         self.init()
     }
