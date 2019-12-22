@@ -1,4 +1,4 @@
-## Báo cáo sự cố
+## Báo cáo sự cố 1234
 ## Feature 
 <br>
 - Create issues (Tạo báo cáo về sự cố) 
@@ -7,6 +7,7 @@
 <br>
 - User open application->Báo cáo sự cố-> ghi địa điểm, tên sự cố, mô tả, hính ảnh -> gửi
 <br>
+
 
 ## Platform
 - IOS
